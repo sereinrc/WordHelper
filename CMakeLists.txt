@@ -43,6 +43,7 @@ else ()
                 ${PROJECT_SOURCES}
                 Sources/Headers/worddictation.h Sources/worddictation.cpp Sources/Forms/worddictation.ui
                 Sources/Headers/wordspelling.h Sources/wordspelling.cpp Sources/Forms/wordspelling.ui
+                Sources/Headers/wordreview.h Sources/wordreview.cpp Sources/Forms/wordreview.ui
         )
     endif ()
 endif ()

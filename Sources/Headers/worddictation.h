@@ -17,11 +17,12 @@ public:
 
     ~WordDictation() override;
 
+    static void Dictation(const QString &word);
+
 private:
     Ui::WordDictation *ui;
     int cont = 0;
     int num = 0;
-    static void Dictation(int cont);
 };
 
 #endif  // WORDDICTATION_H

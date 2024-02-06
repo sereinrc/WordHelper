@@ -17,7 +17,7 @@ WordDictation::WordDictation(QWidget* parent) : QDialog(parent), ui(new Ui::Word
 
     // 开始听力练习
     cont = OperateData::CreatRandom(static_cast<int>(word_data.size() - 1));
-    Dictation(cont);
+    Dictation(word_data[cont].word);
     connect(ui->word_lineEdit, &QLineEdit::returnPressed,
             [=]()
             {
@@ -47,15 +47,15 @@ WordDictation::WordDictation(QWidget* parent) : QDialog(parent), ui(new Ui::Word
                 }
             });
 
-    connect(ui->again_button, &QPushButton::pressed, [=]() { Dictation(cont); });
+    connect(ui->again_button, &QPushButton::pressed, [=]() { Dictation(word_data[cont].word); });
 }
 
 WordDictation::~WordDictation() { delete ui; }
 
 // 根据单词连接网络音频发音
-void WordDictation::Dictation(const int cont)
+void WordDictation::Dictation(const QString &word)
 {
-    const QString key = "https://dict.youdao.com/dictvoice?audio={" + word_data[cont].word + "}&type={1}";
+    const QString key = "https://dict.youdao.com/dictvoice?audio={" + word + "}&type={1}";
     const QUrl audio_url(key);
     auto* player = new QMediaPlayer;
     player->setMedia(audio_url);

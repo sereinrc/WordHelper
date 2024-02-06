@@ -14,16 +14,19 @@ WordSpelling::WordSpelling(QWidget *parent) : QDialog(parent), ui(new Ui::WordSp
 
     // 获取随机单词
     cont = OperateData::CreatRandom(static_cast<int>(word_data.size() - 1));
+    // 得到单词的首字母和尾字母
     ui->wordfirst_label->setText(word_data[cont].word.left(1));
     ui->wordlast_label->setText(word_data[cont].word.right(1));
     ui->meaning_lineEdit->setText(word_data[cont].meaning);
 
-
+    // 当用户返回一个enter键时变化
     connect(ui->word_lineEdit, &QLineEdit::returnPressed,
             [=]()
             {
+                // 将单词拼接完整，用于判断
                 const QString key =
                     word_data[cont].word.left(1) + ui->word_lineEdit->text() + word_data[cont].word.right(1);
+
                 if (key == word_data[cont].word)
                 {
                     // 将用户拼写的单词数据插入数据库中
@@ -36,7 +39,7 @@ WordSpelling::WordSpelling(QWidget *parent) : QDialog(parent), ui(new Ui::WordSp
                     ui->word_lineEdit->clear();
                     ui->new_button->setChecked(false);
 
-                    // 进入下一个单词
+                    // 进入下一个随机单词
                     cont = OperateData::CreatRandom(static_cast<int>(word_data.size() - 1));
                     // 设置下一个填空
                     ui->wordfirst_label->setText(word_data[cont].word.left(1));
